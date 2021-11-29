@@ -1,1 +1,1 @@
-# elasticsearch_cluster_lab
+# Creatng an Elasticsearch Cluster
