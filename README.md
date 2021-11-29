@@ -1,0 +1,1 @@
+# elasticsearch_cluster_lab
