@@ -2,6 +2,7 @@
 
 The goal of this lab is to create an elasticsearch cluster of 3 nodes locally on 3 ubuntu server VMs.
 
+![cluster archi](images/archi.png)
 
 ## Preparing the environment
 
