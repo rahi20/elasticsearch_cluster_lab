@@ -120,7 +120,7 @@ You can also use the `curl` command to check on the cluster :
 
 ## Configuring Kibana
 
-First install kibana. you can install it on your host or on one the nodes or a seperate machine. I installed it on the master node using :  
+First install kibana. You can install it on your host or on one the nodes or a seperate machine. I installed it on the master node using :  
 ```bash 
 sudo apt install kibana # No need to add the key and repo since i've already done that while installing elasticsearch
 ```
