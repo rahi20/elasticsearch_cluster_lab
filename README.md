@@ -106,7 +106,14 @@ sudo systemctl enable elasticsearch # To start auto elasticsearch on boot
 sudo systemctl start elasticsearch
 ```
 
+If the cluster was configured correctly, the cluster should be up and running, to verify we use : 
+```bash 
+sudo systemctl status elasticsearch
+```
+![cluster status](images/cluster-status.png)
 
+You can also use the `curl` command to check on the cluster :
 
-Use `curl` command to check the cluster :
 ![curl the nodes](images/curl-cluster.png)
+
+
