@@ -117,3 +117,36 @@ You can also use the `curl` command to check on the cluster :
 ![curl the nodes](images/curl-cluster.png)
 
 
+
+## Configuring Kibana
+
+First install kibana. you can install it on your host or on one the nodes or a seperate machine. I installed it on the master node using :  
+```bash 
+sudo apt install kibana # No need to add the key and repo since i've already done that while installing elasticsearch
+```
+
+
+Once the installation is done, cd to `/etc/kibana`, and modify the `kibana.yml` file : 
+
+```yml
+
+server.host: "10.5.9.22"
+server.name: "master"
+server.port: 5601
+elasticsearch.hosts: [ "http://10.5.9.22:9200", "http://10.5.8.168:9200", "http://10.5.10.204:9200"]
+```
+
+Start kibana using: 
+```bash
+sudo systemctl start kibana 
+```
+
+Check that everything is running alright : 
+```bash
+sudo systemctl status kibana 
+```
+
+Now open a browser and type in the IP@ of your kibana server followed up with the port : 
+
+Once it's loaded, you should something like this : 
+![curl the nodes](images/kibana-browser.jpg)
