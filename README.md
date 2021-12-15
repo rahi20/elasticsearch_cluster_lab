@@ -1,6 +1,6 @@
 # Creatng an Elasticsearch Cluster
 
-The goal of this lab is to create an elasticsearch cluster of 3 nodes locally on 3 ubuntu server VMs.
+The goal of this lab is to create an elasticsearch cluster of 3 nodes locally on 3 ubuntu 20.04 server VMs.
 
 ![cluster archi](images/archi.png)
 
@@ -17,9 +17,9 @@ sudo apt-get update && sudo apt-get install elasticsearch && sudo apt-get instal
 
 Modify the `/etc/hosts` file to define the hostnames of the nodes in your cluster : 
 ```
-10.5.9.22 master-00
-10.5.8.168 data-00
-10.5.10.204 data-01
+10.5.9.22 master
+10.5.8.168 data00
+10.5.10.204 data01
 ```
 
 
@@ -45,4 +45,68 @@ network:
 
 ## Configuring Elasticsearch
 
+cd to `/etc/elasticsearch` in each VM, we'll configure the elasticsearch cluster with the `elasticsearch.yml` file : 
 
+Master Node :  
+```yml
+cluster.name: lab
+
+node.name: "master"
+
+node.master: true
+
+node.data: true
+
+network.host: 10.5.9.22
+
+http.port: 9200
+
+discovery.seed_hosts: ["10.5.9.22", "10.5.8.168","10.5.10.204"]
+
+cluster.initial_master_nodes: ["10.5.9.22"]
+```
+Data0 Node :
+```yml
+cluster.name: lab
+
+node.name: "data00"
+
+node.data: true
+
+network.host: 10.5.8.168
+
+http.port: 9200
+
+discovery.seed_hosts: ["10.5.9.22", "10.5.8.168","10.5.10.204"]
+
+cluster.initial_master_nodes: ["10.5.9.22"]
+```
+Data1 Node :
+```yml
+cluster.name: lab
+
+node.name: "data01"
+
+node.data: true
+
+network.host: 10.5.10.204
+
+http.port: 9200
+
+discovery.seed_hosts: ["10.5.9.22", "10.5.8.168","10.5.10.204"]
+
+cluster.initial_master_nodes: ["10.5.9.22"]
+```
+
+
+Start elasticsearch on every node using : 
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable elasticsearch # To start auto elasticsearch on boot 
+sudo systemctl start elasticsearch
+```
+
+
+
+Use `curl` command to check the cluster :
+![curl the nodes](images/curl-cluster.png)
